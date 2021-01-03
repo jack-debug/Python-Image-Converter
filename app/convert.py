@@ -18,9 +18,9 @@ def message(file,bool):
 	screenLock.acquire()
 	# if is converted
 	if bool:
-		print datetime.now().time().strftime('%H:%M:%S') + " Converted:  "+ file
+		print(datetime.now().time().strftime('%H:%M:%S') + " Converted:  "+ file)
 	else:
-		print datetime.now().time().strftime('%H:%M:%S') + " Converting:  "+ file
+		print(datetime.now().time().strftime('%H:%M:%S') + " Converting:  "+ file)
 	screenLock.release()
 
 # create a directory if needed to store our converted images!
@@ -62,14 +62,14 @@ def convert_file(file,directory,tgtDir):
 def ai_2_pdf(e):
 	if e.endswith('.ai'):
 		os.rename(e, directory +'\\' +e+'.pdf') 
-		print datetime.now().time().strftime('%H:%M:%S')+ " Converted ai 2 pdf : " + directory +'\\' +e+'.pdf' 
+		print(datetime.now().time().strftime('%H:%M:%S')+ " Converted ai 2 pdf : " + directory +'\\' +e+'.pdf') 
 
 
 # IT IS POINTLESS TO CONVERT WHAT IS ALREADY CONVERTED!!!!
 def image_not_exists(e):
 	if os.path.isfile(directory +'\\' +e+'.jpg'):
 		screenLock.acquire()
-		print "File " + e + " is already converted! \n"
+		print("File " + e + " is already converted! \n")
 		screenLock.release()
 		return False
 	else:
@@ -95,7 +95,7 @@ def checkExtension(ext):
 
 
 def main():
-	print '### PYTHON IMAGE CONVERTER ### \n \n'
+	print('### PYTHON IMAGE CONVERTER ### \n \n')
 	
 	parser = optparse.OptionParser("usage%prog "+ \
 	"-s <source directory> \n ex: usage%prog -s C:\\Users\\USerName\\Desktop\\Photos_Dir \n After -s Specify the directory you will convert")
@@ -103,7 +103,7 @@ def main():
 	help='specify your source directory!')
 	(options, args) = parser.parse_args()
 	if (options.nname == None):
-		print parser.usage
+		print(parser.usage)
 		exit(0)
 	else:
 		tgtDir = os.path.abspath(options.nname)
@@ -114,8 +114,8 @@ def main():
 	
 	
 	
-	print "Started conversion at : " + datetime.now().time().strftime('%H:%M:%S')+ '\n'
-	print "Converting \n -> " + tgtDir + " Directory !\n"
+	print("Started conversion at : " + datetime.now().time().strftime('%H:%M:%S')+ '\n')
+	print("Converting \n -> " + tgtDir + " Directory !\n")
 	# find files to convert
 	try:
 	
@@ -135,9 +135,9 @@ def main():
 					if file.endswith('.tif'):
 						t = Thread(target = convert_file, args = (file,directory,tgtDir))
 						t.start();
-		print " \n Converted Images are stored at - > \n " + os.path.abspath(directory)
+		print(" \n Converted Images are stored at - > \n " + os.path.abspath(directory))
 	except:
-		print "\n The directory at : \n " + tgtDir + "  \n Are you sure is there? \n I am NOT! \n It NOT EXISTS !! Grrrr....\n\n"			
+		print("\n The directory at : \n " + tgtDir + "  \n Are you sure is there? \n I am NOT! \n It NOT EXISTS !! Grrrr....\n\n")			
 					
 				
 
